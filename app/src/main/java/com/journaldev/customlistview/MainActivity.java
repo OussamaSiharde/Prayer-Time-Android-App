@@ -49,51 +49,54 @@ public class MainActivity extends AppCompatActivity {
 
             if (links != null) {
                 for (Element link : links) {
-                        Elements rows = link.select("tr");
-                        for (Element row : rows) {
-                            Elements columns = row.select(".prayertime");
-                            int i = 0 ;
-                            String date = null;
-                            String fajr = null;
-                            String sunrise = null;
-                            String dhuhr = null;
-                            String asr = null;
-                            String maghrib = null;
-                            String isha = null;
-                            for (Element column : columns) {
+                    Elements rows = link.select("tr");
+                    for (Element row : rows) {
 
-                                if( i == 0){
-                                    date = column.text();
-                                }
-                                if( i == 1){
-                                    fajr = column.text();
-                                }
-                                if( i == 2){
-                                    sunrise = column.text();
-                                }
-                                if( i == 3){
-                                    dhuhr = column.text();
-                                }
-                                if( i == 4){
-                                    asr = column.text();
-                                }
-                                if( i == 5){
-                                    maghrib = column.text();
-                                }
-                                if( i == 6){
-                                    isha = column.text();
-                                }
+                        Elements columns = row.select(".prayertime");
+                        int i = 0;
+                        String date = null;
+                        String fajr = null;
+                        String sunrise = null;
+                        String dhuhr = null;
+                        String asr = null;
+                        String maghrib = null;
+                        String isha = null;
 
-                                i++;
+                        for (Element column : columns) {
+                            if (i == 0) {
+                                date = column.text();
                             }
-                            dataModels.add(new DataModel(date, fajr, sunrise, dhuhr, asr, maghrib, isha));
-
+                            if (i == 1) {
+                                fajr = column.text();
+                            }
+                            if (i == 2) {
+                                sunrise = column.text();
+                            }
+                            if (i == 3) {
+                                dhuhr = column.text();
+                            }
+                            if (i == 4) {
+                                asr = column.text();
+                            }
+                            if (i == 5) {
+                                maghrib = column.text();
+                            }
+                            if (i == 6) {
+                                isha = column.text();
+                            }
+                            i++;
                         }
+                        if (date != null && !date.trim().isEmpty()) {
+                            dataModels.add(new DataModel(date, fajr, sunrise, dhuhr, asr, maghrib, isha));
+                        }
+
                     }
+                }
             }
 
             return null;
         }
+
         protected void onPostExecute(Void result) {
             adapter = new CustomAdapter(dataModels, getApplicationContext());
             listView.setAdapter(adapter);
