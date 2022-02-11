@@ -51,10 +51,10 @@ public class MainActivity extends AppCompatActivity {
                 for (Element link : links) {
                     Elements rows = link.select("tr");
                     for (Element row : rows) {
-
                         Elements columns = row.select(".prayertime");
+                        Elements columns_data = row.select(".prayertime-1");
                         int i = 0;
-                        String date = null;
+                        String date = columns_data.text();
                         String fajr = null;
                         String sunrise = null;
                         String dhuhr = null;
@@ -64,24 +64,21 @@ public class MainActivity extends AppCompatActivity {
 
                         for (Element column : columns) {
                             if (i == 0) {
-                                date = column.text();
-                            }
-                            if (i == 1) {
                                 fajr = column.text();
                             }
-                            if (i == 2) {
+                            if (i == 1) {
                                 sunrise = column.text();
                             }
-                            if (i == 3) {
+                            if (i == 2) {
                                 dhuhr = column.text();
                             }
-                            if (i == 4) {
+                            if (i == 3) {
                                 asr = column.text();
                             }
-                            if (i == 5) {
+                            if (i == 4) {
                                 maghrib = column.text();
                             }
-                            if (i == 6) {
+                            if (i == 5) {
                                 isha = column.text();
                             }
                             i++;
